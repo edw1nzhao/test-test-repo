@@ -1,0 +1,25 @@
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: test
+    steps:
+      - name: Test
+        id: test
+        uses: ezhao7/variable-config-manager@v0.0.1
+        with:
+          pat: 05b18b85cdb3c67f220aaecaa579a4d8da077a34
+          config-repo: ezhao7/test-repo
+          env: dev.yml
+      - name: Test2
+        id: test2
+        uses: ezhao7/variable-config-manager@v0.0.1
+        with:
+          pat: 05b18b85cdb3c67f220aaecaa579a4d8da077a34
+          config-repo: ezhao7/test-repo
+          env: test/something/stage.yml
+      - name: output1
+        run: echo ${{ steps.test.outputs.env-values }}
+      - name: output2
+        run: echo ${{ steps.test.outputs.env-values }}
